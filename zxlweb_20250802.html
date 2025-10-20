@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />  <!-- 设置页面字符编码为UTF-8 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />  <!-- 适应移动设备屏幕宽度 -->
+  <title>ZXL_websites</title>  <!-- 网页标题 -->
+  <style>
+    /* 时间显示区域的样式 */
+    #timeDiv {
+      color: rgb(5, 0, 1); /* 主时间文字颜色 */
+      width: 1500px;       /* 宽度1500像素 */
+      height: 90px;        /* 高度90像素 */
+      border: 2px;         /* 边框宽度2px（未指定样式和颜色，浏览器默认为none） */
+      background-color: snow; /* 背景颜色为雪白色 */
+      font-size: 70px;     /* 主时间字体大小70像素 */
+      /* text-align: center; */  /* 注释掉了居中对齐，改用flex布局 */
+
+      /* 新增：使用flex布局让子元素同行显示 */
+      display: flex;             /* 采用弹性盒布局 */
+      justify-content: left;   /* 子元素左对齐 */
+      align-items: center;       /* 子元素垂直居中 */
+      gap: 20px;                 /* 子元素间水平间距20像素 */
+    }
+
+    /* “Count ——”计时文字的样式 */
+    #workTimeText {
+      color: green;        /* 文字颜色为绿色 */
+      font-size: 40px;     /* 字体大小40像素 */
+      margin-top: 0;       /* 上外边距0，去除默认间距 */
+      padding-top: 0;      /* 上内边距0 */
+    }
+  </style>
+</head>
+<body>
+  上官平川<br />  <!-- 显示姓名，换行 -->
+
+  <!-- 显示时间的按钮 -->
+  <input type="button" value="Show_Time" id="displayTimeBtn" />
+  <!-- 停止时间显示的按钮 -->
+  <input type="button" value="Stop" id="stopTimeBtn" />
+  <br />  <!-- 换行 -->
+
+  <!-- 时间显示容器，包含两个子div -->
+  <div id="timeDiv">
+    <div id="clockText"></div>      <!-- 用于显示当前本地时间 -->
+    <div id="workTimeText"></div>   <!-- 用于显示从入职开始的计时信息 -->
+  </div>
+
+  <!-- 以下是网页的链接和内容部分 -->
+  <h1>首要</h1>
+  <a href="https://scholar.google.com/" target="_blank" rel="noopener noreferrer">Google-scholar</a>
+  <a href="https://www.google.com.hk/?gws_rd=ssl" target="_blank" rel="noopener noreferrer">Google</a>
+  <a href="https://cn.bing.com/" target="_blank" rel="noopener noreferrer">Bing</a>
+
+  <h1>音乐</h1>
+  <a href="https://www.youtube.com/embed/LV-WzqnA12w?loop=1&playlist=LV-WzqnA12w&autoplay=1" target="_blank" rel="noopener noreferrer">痛经音乐</a>
+  <a href="https://www.youtube.com/watch?v=3SlxdaNbTuU" target="_blank" rel="noopener noreferrer">提神音乐</a>
+
+  <!-- 下拉选择框，选择后跳转对应音乐网站 -->
+  <select id="websiteSelector" onchange="navigateToSite()">
+    <option value="">-- 更多音乐 --</option>
+    <option
+      value="https://www.google.com/search?sca_esv=4db1c2965aeee58e&sxsrf=AE3TifOjcevIH8z6oW0m14fvEqTBjO2h9A:1750057125223&q=%E7%A6%BB%E5%88%AB%E5%BC%80%E5%87%BA%E8%8A%B1&udm=7&fbs=AIIjpHybaGNnaZw_4TckIDK59RtxzhN-zPLOQlOthwdFc1z8xdIAyg6_Ea865cNowKrZE6OnFad-aHJHZuyaG9jM9fMITULFeMXd0_Opmun6MYDeZ14Pyge0e55FZA7fIkotUhF3hC2isi4WMDhBmQMRgVbkhHVAGc8o5A3SW2Ap7edp6sHaJWKXB5JVnT-ImK6PAIxWiooGZUdqbOE29jm0yRWNlI1XDA&sa=X&ved=2ahUKEwjFmaTqrvWNAxXmdvUHHVlNBqQQtKgLegQICRAB&biw=1512&bih=823&dpr=2#fpstate=ive&vld=cid:674b69ff,vid:whW29cbP-0U,st:0"
+      >离别开出花</option
+    >
+    <option value="https://www.youtube.com/watch?v=imm6_ZaCDj4">不谓侠</option>
+    <option
+      value="https://www.bilibili.com/video/BV1Y841127nz/?vd_source=b68e7bd75672100eb84ecb1639e29ca2"
+      >剑魂</option
+    >
+    <option value="https://www.youtube.com/watch?v=i6wP6yOSHWg">走了就别后悔</option>   
+    <option value="https://www.youtube.com/watch?v=J3BA9CLWvmQ">潜龙勿用</option> 
+    <option value="https://www.youtube.com/watch?v=85OLkAFOlYM">国际歌</option> 
+    <option value="https://www.zhihu.com">知乎</option>
+    <option value="https://www.bilibili.com">哔哩哔哩</option>
+
+  </select>
+
+  <h1>AI</h1>
+  <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">Chatgpt</a>
+  <a href="https://chat.deepseek.com/" target="_blank" rel="noopener noreferrer">Deepseek</a>
+  <a href="https://www.kimi.com/" target="_blank" rel="noopener noreferrer">Kimi</a>
+  <a href="https://www.tongyi.com/" target="_blank" rel="noopener noreferrer">千问</a>
+
+  <h1>LAB</h1>
+  <a
+    href="https://www.cibr.ac.cn/science/team/detail/1344?language=cn"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Mori-lab</a
+  >
+
+  <a
+    href="http://www.wormweb.org/"
+    target="_blank"
+    rel="noopener noreferrer"
+    >神经连接</a
+  >
+
+  <a
+    href="https://www.wormwiring.org/apps/neuronMaps/"
+    target="_blank"
+    rel="noopener noreferrer"
+    >突触连接</a
+  >
+
+    <a
+    href="https://cengen.shinyapps.io/CengenApp-legacy/"
+    target="_blank"
+    rel="noopener noreferrer"
+    >基因在哪cell表达或cell表达什么基因</a
+  >
+
+  <a
+    href="https://www.dropbox.com/scl/fo/j9x2ouuparxquk78t2es1/AJA8HkW8eZjWKYnbR-9InHg/Protocols?dl=0&e=1&rlkey=xy4r7par20vkun29hx0b50vy5&subfolder_nav_tracking=1"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Shibata</a
+  >
+  &nbsp;
+  <a href="\\10.50.6.238" target="_blank" rel="noopener noreferrer">Synology</a>
+  &nbsp;
+  <a href="\\10.50.7.221" target="_blank" rel="noopener noreferrer"
+    >GelMachine用finder_smb://10.50.7.221/Images</a
+  >
+
+  <h1>下载</h1>
+  <a href="https://yt1d.com/en307/" target="_blank" rel="noopener noreferrer"
+    >YouTube-下载</a
+  >
+  <a href="https://sci-hub.se/10.1038/247073a0" target="_blank" rel="noopener noreferrer"
+    >sci-hub</a
+  >
+
+  <script>
+    var v;  // 定时器变量，控制时间刷新间隔
+
+    // 页面加载完成后执行的函数
+    window.onload = function () {
+      displayTime();             // 先调用一次显示时间，防止加载时延迟
+      v = window.setInterval(displayTime, 1000);  // 每隔1000毫秒（1秒）调用displayTime刷新时间
+
+      // “Show_Time”按钮点击事件：重新启动定时器
+      document.getElementById("displayTimeBtn").onclick = function () {
+        v = window.setInterval(displayTime, 1000);
+      };
+
+      // “Stop”按钮点击事件：清除定时器，停止时间刷新
+      document.getElementById("stopTimeBtn").onclick = function () {
+        window.clearInterval(v);
+      };
+    };
+
+    // 时间显示和工作时长计算函数
+    function displayTime() {
+      var nowTime = new Date();  // 获取当前时间对象
+      document.getElementById("clockText").textContent = nowTime.toLocaleString(); // 显示本地格式时间字符串
+
+      // 计算从入职时间（2024年9月18日9点）到当前时间的差值（单位：毫秒）
+      var startTime = new Date("2024-09-18T09:00:00"); // 入职时间固定值
+      var diff = nowTime - startTime; // 当前时间减去入职时间，得到时间差（毫秒）
+
+      if (diff >= 0) {  // 如果当前时间晚于或等于入职时间
+        var seconds = Math.floor(diff / 1000);       // 转换为秒数（向下取整）
+        var days = Math.floor(seconds / (24 * 3600)); // 计算完整天数
+        seconds %= 24 * 3600;                         // 去除完整天数后剩余秒数
+        var hours = Math.floor(seconds / 3600);      // 计算小时数
+        seconds %= 3600;                              // 去除完整小时数后剩余秒数
+        var minutes = Math.floor(seconds / 60);      // 计算分钟数
+        seconds %= 60;                                // 剩余秒数
+
+        // 格式化字符串，显示形如 "Count ——天:时:分:秒"
+        var formatted = `Count ——${days}:${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+        document.getElementById("workTimeText").textContent = formatted; // 更新计时显示文本
+      } else {
+        // 如果当前时间早于入职时间，显示提示文字
+        document.getElementById("workTimeText").textContent = "Count —— 尚未入职";
+      }
+    }
+
+    // 辅助函数：数字小于10时补零，保证两位数格式显示
+    function pad(num) {
+      return num.toString().padStart(2, "0");
+    }
+
+    // 下拉框选择后跳转对应网址的函数
+    function navigateToSite() {
+      const selector = document.getElementById("websiteSelector");  // 获取选择框元素
+      const selectedValue = selector.value;                        // 读取当前选中的值（URL）
+      if (selectedValue) {
+        window.location.href = selectedValue;                      // 跳转到对应网址
+      }
+    }
+  </script>
+</body>
+</html>
